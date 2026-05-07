@@ -1,7 +1,7 @@
 import React from 'react';
+import ItemCardapio from './ItemCardapio'; // Importando o componente novo
 
 const App = () => {
-  // Lista de itens do cardápio
   const cardapio = [
     { id: 1, nome: "X-Burguer Clássico", preco: 22.50 },
     { id: 2, nome: "Batata Frita Especial", preco: 18.00 },
@@ -10,13 +10,12 @@ const App = () => {
     { id: 5, nome: "Refrigerante Lata", preco: 6.00 },
   ];
 
-  // Estilização básica inline
   const styles = {
     container: {
       fontFamily: 'Arial, sans-serif',
       padding: '20px',
       maxWidth: '500px',
-      margin: '0 auto',
+      margin: '20px auto',
       backgroundColor: '#f9f9f9',
       borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -30,20 +29,6 @@ const App = () => {
     lista: {
       listStyle: 'none',
       padding: 0
-    },
-    item: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '12px 0',
-      borderBottom: '1px solid #ddd'
-    },
-    nome: {
-      fontWeight: 'bold',
-      color: '#333'
-    },
-    preco: {
-      color: '#2e7d32',
-      fontWeight: 'bold'
     }
   };
 
@@ -51,13 +36,13 @@ const App = () => {
     <div style={styles.container}>
       <h1 style={styles.titulo}>Cardápio Lanchonete</h1>
       <ul style={styles.lista}>
+        {/* Usando o componente ItemCardapio 5 vezes através do map */}
         {cardapio.map((item) => (
-          <li key={item.id} style={styles.item}>
-            <span style={styles.nome}>{item.nome}</span>
-            <span style={styles.preco}>
-              {item.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-            </span>
-          </li>
+          <ItemCardapio 
+            key={item.id} 
+            nome={item.nome} 
+            preco={item.preco} 
+          />
         ))}
       </ul>
     </div>
