@@ -1,7 +1,10 @@
-import React from 'react';
-import ItemCardapio from './ItemCardapio'; // Importando o componente novo
+import React, { useState } from 'react'; // 1. Importamos o useState
+import ItemCardapio from './ItemCardapio';
 
 const App = () => {
+  // 2. Criamos o estado do contador (começa em 0)
+  const [totalItens, setTotalItens] = useState(0);
+
   const cardapio = [
     { id: 1, nome: "X-Burguer Clássico", preco: 22.50 },
     { id: 2, nome: "Batata Frita Especial", preco: 18.00 },
@@ -9,6 +12,11 @@ const App = () => {
     { id: 4, nome: "Milkshake de Chocolate", preco: 14.50 },
     { id: 5, nome: "Refrigerante Lata", preco: 6.00 },
   ];
+
+  // 3. Função que aumenta o contador
+  const adicionarAoCarrinho = () => {
+    setTotalItens(totalItens + 1);
+  };
 
   const styles = {
     container: {
@@ -20,28 +28,33 @@ const App = () => {
       borderRadius: '8px',
       boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
     },
-    titulo: {
+    contador: {
       textAlign: 'center',
-      color: '#d32f2f',
-      borderBottom: '2px solid #d32f2f',
-      paddingBottom: '10px'
-    },
-    lista: {
-      listStyle: 'none',
-      padding: 0
+      backgroundColor: '#d32f2f',
+      color: 'white',
+      padding: '10px',
+      borderRadius: '5px',
+      marginBottom: '20px',
+      fontWeight: 'bold'
     }
   };
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.titulo}>Cardápio Lanchonete</h1>
-      <ul style={styles.lista}>
-        {/* Usando o componente ItemCardapio 5 vezes através do map */}
+      <h1 style={{textAlign: 'center'}}>Cardápio Lanchonete</h1>
+      
+      {/* 4. Exibindo o total na tela */}
+      <div style={styles.contador}>
+        Total de itens do pedido: {totalItens}
+      </div>
+
+      <ul style={{listStyle: 'none', padding: 0}}>
         {cardapio.map((item) => (
           <ItemCardapio 
             key={item.id} 
             nome={item.nome} 
             preco={item.preco} 
+            funcaoAdicionar={adicionarAoCarrinho} // Passando a função como prop
           />
         ))}
       </ul>

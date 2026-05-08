@@ -1,30 +1,42 @@
 import React from 'react';
 
-// O componente recebe 'nome' e 'preco' como props
-const ItemCardapio = ({ nome, preco }) => {
+const ItemCardapio = ({ nome, preco, funcaoAdicionar }) => {
   const itemStyle = {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column', // Mudamos para coluna para caber o botão embaixo
     padding: '12px 0',
     borderBottom: '1px solid #ddd'
   };
 
-  const nomeStyle = {
-    fontWeight: 'bold',
-    color: '#333'
+  const rowStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '8px'
   };
 
-  const precoStyle = {
-    color: '#2e7d32',
+  const botaoStyle = {
+    backgroundColor: '#2e7d32',
+    color: 'white',
+    border: 'none',
+    padding: '8px',
+    borderRadius: '4px',
+    cursor: 'pointer',
     fontWeight: 'bold'
   };
 
   return (
     <li style={itemStyle}>
-      <span style={nomeStyle}>{nome}</span>
-      <span style={precoStyle}>
-        {preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-      </span>
+      <div style={rowStyle}>
+        <span style={{fontWeight: 'bold'}}>{nome}</span>
+        <span style={{color: '#2e7d32', fontWeight: 'bold'}}>
+          {preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+        </span>
+      </div>
+      
+      {/* 5. Botão que chama a função de adicionar quando clicado */}
+      <button style={botaoStyle} onClick={funcaoAdicionar}>
+        Adicionar ao pedido
+      </button>
     </li>
   );
 };
